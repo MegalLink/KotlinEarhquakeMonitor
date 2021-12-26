@@ -1,15 +1,14 @@
 package com.example.recyclerview
 
-import android.annotation.SuppressLint
-import android.text.Layout
+import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.databinding.EqListItemBinding
+
+private val TAG=EqAdapter::class.java.simpleName
 
 class EqAdapter:ListAdapter<Earthquake,EqAdapter.EqViewHolder>(DiffCallback) {
     //Ayuda al adapter a ver que elemento cambio
@@ -22,11 +21,24 @@ class EqAdapter:ListAdapter<Earthquake,EqAdapter.EqViewHolder>(DiffCallback) {
            return oldItem == newItem
         }
     }
+    //Se inicializa en otro lado
+    lateinit var onItemClickListener:(Earthquake)-> Unit
 
     inner class EqViewHolder(private val binding:EqListItemBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(earthquake: Earthquake){
             binding.tvEqMagnitude.text=earthquake.magnitude.toString()
             binding.tvEqPlace.text=earthquake.place
+            //binding.root hace referencia a view
+            binding.root.setOnClickListener{
+                //Validacion para ver si se inicializo el listener , en este caso en main
+                if(::onItemClickListener.isInitialized){
+                    onItemClickListener(earthquake)
+                }else{
+                    Log.e(TAG,"onItemClicListener not initialized")
+                }
+
+            }
+
         }
 
     }
