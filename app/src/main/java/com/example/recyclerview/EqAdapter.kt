@@ -38,6 +38,8 @@ class EqAdapter:ListAdapter<Earthquake,EqAdapter.EqViewHolder>(DiffCallback) {
                 }
 
             }
+            //Para que no de lags por el tiempo de espera entre cada item, se nota lag al momento de hacer scroll
+            binding.executePendingBindings()
 
         }
 
