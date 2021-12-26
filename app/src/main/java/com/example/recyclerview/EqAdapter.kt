@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.recyclerview.databinding.EqListItemBinding
 
 class EqAdapter:ListAdapter<Earthquake,EqAdapter.EqViewHolder>(DiffCallback) {
     //Ayuda al adapter a ver que elemento cambio
@@ -22,21 +23,24 @@ class EqAdapter:ListAdapter<Earthquake,EqAdapter.EqViewHolder>(DiffCallback) {
         }
     }
 
-    inner class EqViewHolder(val view:View):RecyclerView.ViewHolder(view){
-        val magnitudeText=view.findViewById<TextView>(R.id.tv_eq_magnitude)
-        val placeText=view.findViewById<TextView>(R.id.tv_eq_place)
+    inner class EqViewHolder(private val binding:EqListItemBinding):RecyclerView.ViewHolder(binding.root){
+        fun bind(earthquake: Earthquake){
+            binding.tvEqMagnitude.text=earthquake.magnitude.toString()
+            binding.tvEqPlace.text=earthquake.place
+        }
 
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): EqAdapter.EqViewHolder {
         //El parent es el recycler view donde va a estar funcionando el adapter
-        val view =LayoutInflater.from(parent.context).inflate(R.layout.eq_list_item,parent,false)
-        return EqViewHolder(view)
+        val binding= EqListItemBinding.inflate(
+            LayoutInflater.from(parent.context))
+
+        return EqViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: EqAdapter.EqViewHolder, position: Int) {
         //Escribimos desde la lista a la vista del recycler view
         val earthquake=getItem(position)
-        holder.magnitudeText.text=earthquake.magnitude.toString()
-        holder.placeText.text=earthquake.place
+        holder.bind(earthquake)
     }
 }

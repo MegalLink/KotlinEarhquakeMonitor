@@ -1,29 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:text="4.3"
-        android:layout_marginEnd="10dp"
-        android:textColor="@color/black"
-        android:textStyle="bold"
-        android:id="@+id/tv_eq_magnitude"/>
-    <ImageView
-        android:id="@+id/iv_arrow_right"
-        android:src="@drawable/ic_chevron_right_black_24dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_eq_place"
-        android:text="80 km E Ny"
-        android:textSize="20sp"
-        android:layout_toStartOf="@+id/iv_arrow_right"
-        android:layout_toEndOf="@id/tv_eq_magnitude"/>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-</RelativeLayout>
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="4.3"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:id="@+id/tv_eq_magnitude" />
+
+        <ImageView
+            android:id="@+id/iv_arrow_right"
+            android:src="@drawable/ic_chevron_right_black_24dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_eq_place"
+            android:text="80 km E Ny"
+            android:textSize="20sp"
+            android:layout_toStartOf="@+id/iv_arrow_right"
+            android:layout_toEndOf="@id/tv_eq_magnitude" />
+
+    </RelativeLayout>
+</layout>
