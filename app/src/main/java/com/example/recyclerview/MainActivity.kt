@@ -2,6 +2,7 @@ package com.example.recyclerview
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclerview.databinding.ActivityMainBinding
 
@@ -14,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.rvEq.layoutManager=LinearLayoutManager(this)
         val eqList= mutableListOf<Earthquake>()
-        eqList.add(Earthquake("1","Buenos aires",4.3,1234543453,-103.423,28.233))
+       /* eqList.add(Earthquake("1","Buenos aires",4.3,1234543453,-103.423,28.233))
         eqList.add(Earthquake("2","Quito",4.3,1234543453,-103.423,28.233))
         eqList.add(Earthquake("3","Malos aires",4.3,1234543453,-103.423,28.233))
         eqList.add(Earthquake("4","Bogota",4.3,1234543453,-103.423,28.233))
@@ -23,10 +24,14 @@ class MainActivity : AppCompatActivity() {
         eqList.add(Earthquake("7","Guayaquil",4.3,1234543453,-103.423,28.233))
         eqList.add(Earthquake("8","Tulcan",4.3,1234543453,-103.423,28.233))
         eqList.add(Earthquake("9","Mexico DF",4.3,1234543453,-103.423,28.233))
-
+*/
         val adapter=EqAdapter()
         binding.rvEq.adapter=adapter
         adapter.submitList(eqList)
-
+        if(eqList.isEmpty()){
+            binding.tvEmptyEq.visibility= View.VISIBLE
+        }else{
+            binding.tvEmptyEq.visibility= View.GONE
+        }
     }
 }

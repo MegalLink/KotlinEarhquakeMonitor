@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">RecyclerView</string>
+    <string name="no_earthquakes_right_now">NO EARTHQUAKES RIGHT NOW</string>
 </resources>
