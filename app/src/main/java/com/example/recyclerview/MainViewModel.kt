@@ -3,13 +3,18 @@ package com.example.recyclerview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MainViewModel:ViewModel() {
     private val _eqList = MutableLiveData<MutableList<Earthquake>>()
     val eqList: LiveData<MutableList<Earthquake>> = _eqList
 
     init {
-
+        viewModelScope.launch {
+            fetchEarthquakes()
+        }
     }
 
     private fun fetchEarthquakes(){
@@ -23,6 +28,6 @@ class MainViewModel:ViewModel() {
         eqList.add(Earthquake("7","Guayaquil",4.3,1234543453,-103.423,28.233))
         eqList.add(Earthquake("8","Tulcan",4.3,1234543453,-103.423,28.233))
         eqList.add(Earthquake("9","Mexico DF",4.3,1234543453,-103.423,28.233))
-        this._eqList.value=eqList
+        this@MainViewModel._eqList.value=eqList
     }
 }
