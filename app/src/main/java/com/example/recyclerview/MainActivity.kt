@@ -40,5 +40,7 @@ class MainActivity : AppCompatActivity() {
         }else{
             binding.tvEmptyEq.visibility= View.GONE
         }
+
+        service.getLastHourEarthquake()
     }
 }
