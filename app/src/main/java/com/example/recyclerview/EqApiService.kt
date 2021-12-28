@@ -4,10 +4,9 @@ import retrofit2.http.GET
 import retrofit2.Retrofit
 import retrofit2.converter.scalars.ScalarsConverterFactory
 
-
 interface EqApiService {
     @GET("all_hour.geojson")
-    fun getLastHourEarthquake(): String
+    suspend fun getLastHourEarthquake(): String
 }
 
 private val retrofit = Retrofit.Builder()

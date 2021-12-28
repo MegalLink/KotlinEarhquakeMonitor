@@ -12,44 +12,40 @@ import com.example.recyclerview.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
+    private val adapter = EqAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val adapter = EqAdapter()
-
-        binding.rvEq.layoutManager = LinearLayoutManager(this)
-        binding.rvEq.adapter = adapter
-
-        adapter.onItemClickListener = {
-            Toast.makeText(this,it.place,Toast.LENGTH_SHORT).show()
-        }
+        //ORDER IS IMPORTANT
+        initRecyclerView()
+        initObservers()
+        initListeners()
 
         mainViewModel.eqList.observe(this, Observer {
             adapter.submitList(it)
             handleEmptyView(it)
         })
-       // service.getLastHourEarthquake()
     }
 
     private fun initObservers(){
-      /*  mainViewModel.eqList.observe(this, Observer {
+        mainViewModel.eqList.observe(this, Observer {
             adapter.submitList(it)
             handleEmptyView(it)
-        })*/
+        })
     }
 
     private fun initListeners(){
         //Inicializamos o damos la funcionalidad a onItemClicListener
-     //   adapter.onItemClickListener = {
-     //       Toast.makeText(this,it.place,Toast.LENGTH_SHORT).show()
-      // }
+        adapter.onItemClickListener = {
+            Toast.makeText(this,it.place,Toast.LENGTH_SHORT).show()
+       }
 
     }
 
     private fun initRecyclerView(){
         binding.rvEq.layoutManager = LinearLayoutManager(this)
-       // binding.rvEq.adapter = adapter
+        binding.rvEq.adapter = adapter
     }
 
     private fun handleEmptyView(list:MutableList<Earthquake>){
