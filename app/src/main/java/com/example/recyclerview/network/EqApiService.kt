@@ -1,6 +1,7 @@
-package com.example.recyclerview
+package com.example.recyclerview.network
 
 
+import com.example.recyclerview.EqApiResponse
 import retrofit2.http.GET
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory

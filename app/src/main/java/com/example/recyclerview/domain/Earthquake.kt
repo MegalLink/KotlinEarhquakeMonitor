@@ -1,4 +1,4 @@
-package com.example.recyclerview
+package com.example.recyclerview.domain
 
 data class Earthquake(
     val id:String,

@@ -1,4 +1,4 @@
-package com.example.recyclerview
+package com.example.recyclerview.ui
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.databinding.EqListItemBinding
+import com.example.recyclerview.domain.Earthquake
 
 private val TAG=EqAdapter::class.java.simpleName
 

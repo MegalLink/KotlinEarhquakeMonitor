@@ -8,6 +8,9 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclerview.databinding.ActivityMainBinding
+import com.example.recyclerview.domain.Earthquake
+import com.example.recyclerview.ui.EqAdapter
+import com.example.recyclerview.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
