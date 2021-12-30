@@ -26,7 +26,7 @@ class MainViewModel : ViewModel() {
                 Earthquake(
                     feature.id,
                     feature.properties.place,
-                    feature.properties.mag,
+                    feature.properties.magnitude,
                     feature.properties.time,
                     feature.geometry.longitude,
                     feature.geometry.latitude
