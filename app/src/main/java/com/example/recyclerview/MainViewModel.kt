@@ -1,12 +1,10 @@
 package com.example.recyclerview
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import org.json.JSONObject
 
 class MainViewModel : ViewModel() {
     private val _eqList = MutableLiveData<MutableList<Earthquake>>()
@@ -20,26 +18,20 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    private fun parseStringToJson(response: String): MutableList<Earthquake> {
-        val responseJson = JSONObject(response)
-        val features = responseJson.getJSONArray("features")
+    private fun parseStringToJson(response: EqApiResponse): MutableList<Earthquake> {
 
         val eqList = mutableListOf<Earthquake>()
-        for (i in 0 until features.length()) {
-            val feature = features[i] as JSONObject
-            Log.i("feature",feature.toString())
-            val id = feature.getString("id")
-            val properties = feature.getJSONObject("properties")
-            val magnitude = properties.getDouble("mag")
-            val place = properties.getString("place")
-            val time = properties.getLong("time")
-            val geometry = feature.getJSONObject("geometry")
-            val coordinates = geometry.getJSONArray("coordinates")
-            val longitude = coordinates.getDouble(0)
-            val latitude = coordinates.getDouble(1)
-            val earthquake = Earthquake(id, place, magnitude, time, longitude, latitude)
-            Log.i("earthquake",earthquake.toString())
-            eqList.add(earthquake)
+        response.features.forEach { feature ->
+            eqList.add(
+                Earthquake(
+                    feature.id,
+                    feature.properties.place,
+                    feature.properties.mag,
+                    feature.properties.time,
+                    feature.geometry.longitude,
+                    feature.geometry.latitude
+                )
+            )
         }
         return eqList
 
