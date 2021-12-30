@@ -1,18 +1,18 @@
 package com.example.recyclerview.repository
 
+import android.util.Log
 import com.example.recyclerview.EqApiResponse
 import com.example.recyclerview.domain.Earthquake
 import com.example.recyclerview.network.service
 
 class EqRepository {
 
-    suspend fun fetchEqList():MutableList<Earthquake>{
+    suspend fun fetchEqList(): MutableList<Earthquake> {
         val response = service.getLastHourEarthquake()
-        val eqList = parseStringToJson(response)
-        return eqList
+        return parseResponse(response)
     }
 
-    private fun parseStringToJson(response: EqApiResponse): MutableList<Earthquake> {
+    private fun parseResponse(response: EqApiResponse): MutableList<Earthquake> {
 
         val eqList = mutableListOf<Earthquake>()
         response.features.forEach { feature ->
@@ -20,7 +20,7 @@ class EqRepository {
                 Earthquake(
                     feature.id,
                     feature.properties.place,
-                    feature.properties.magnitude,
+                    feature.properties.mag,
                     feature.properties.time,
                     feature.geometry.longitude,
                     feature.geometry.latitude

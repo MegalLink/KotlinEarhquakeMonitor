@@ -15,7 +15,7 @@ import com.example.recyclerview.viewmodel.MainViewModel
 class MainActivity : AppCompatActivity() {
     private lateinit var binding:ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
-    private val adapter = EqAdapter()
+    private val adapter = EqAdapter(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)

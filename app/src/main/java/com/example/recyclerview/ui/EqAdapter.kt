@@ -1,17 +1,20 @@
 package com.example.recyclerview.ui
 
+import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.recyclerview.R
 import com.example.recyclerview.databinding.EqListItemBinding
 import com.example.recyclerview.domain.Earthquake
+import kotlin.math.roundToLong
 
 private val TAG=EqAdapter::class.java.simpleName
 
-class EqAdapter:ListAdapter<Earthquake,EqAdapter.EqViewHolder>(DiffCallback) {
+class EqAdapter(private val context: Context):ListAdapter<Earthquake,EqAdapter.EqViewHolder>(DiffCallback) {
     //Ayuda al adapter a ver que elemento cambio
     companion object DiffCallback:DiffUtil.ItemCallback<Earthquake>(){
         override fun areItemsTheSame(oldItem: Earthquake, newItem: Earthquake): Boolean {
@@ -27,8 +30,8 @@ class EqAdapter:ListAdapter<Earthquake,EqAdapter.EqViewHolder>(DiffCallback) {
 
     inner class EqViewHolder(private val binding:EqListItemBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(earthquake: Earthquake){
-            binding.tvEqMagnitude.text=earthquake.magnitude.toString()
-            binding.tvEqPlace.text=earthquake.place
+            binding.tvEqMagnitude.text= context.getString(R.string.magnitude_format,earthquake.magnitude)
+            earthquake.place.also { binding.tvEqPlace.text = it }
             //binding.root hace referencia a view
             binding.root.setOnClickListener{
                 //Validacion para ver si se inicializo el listener , en este caso en main
@@ -58,4 +61,6 @@ class EqAdapter:ListAdapter<Earthquake,EqAdapter.EqViewHolder>(DiffCallback) {
         val earthquake=getItem(position)
         holder.bind(earthquake)
     }
+
+    fun Double.round(decimals: Int = 2): Double = "%.${decimals}f".format(this).toDouble()
 }
