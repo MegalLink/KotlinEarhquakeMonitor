@@ -9,8 +9,8 @@ interface EqDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE) //remplaza si se mete un elemento con el mismo id
     suspend fun insertAll(eqList:MutableList<Earthquake>)
     @Query(value = "Select * from earthquakes")
-    suspend fun getEarthquakes():MutableList<Earthquake>
-
+    fun getEarthquakes():LiveData<MutableList<Earthquake>> //with live data this emits the list
+    //every time that detects a change in the table
     /*
     @Delete
     fun deleteEarthquake(vararg eq:Earthquake) //vararg para pasarle una lista de terremotos
