@@ -1,15 +1,19 @@
 package com.example.recyclerview.repository
 
 import android.util.Log
+import androidx.room.Database
 import com.example.recyclerview.EqApiResponse
 import com.example.recyclerview.domain.Earthquake
 import com.example.recyclerview.network.service
+import com.example.recyclerview.persistance.EqDB
 
-class EqRepository {
+class EqRepository(private val db: EqDB) {
 
     suspend fun fetchEqList(): MutableList<Earthquake> {
         val response = service.getLastHourEarthquake()
-        return parseResponse(response)
+        val eqList = parseResponse(response)
+        db.eqDao.insertAll(eqList)
+       return db.eqDao.getEarthquakes()
     }
 
     private fun parseResponse(response: EqApiResponse): MutableList<Earthquake> {
