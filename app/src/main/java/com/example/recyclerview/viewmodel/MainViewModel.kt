@@ -13,7 +13,7 @@ import java.net.UnknownHostException
 val TAG = MainViewModel::class.simpleName
 
 // using by viewModel() this application si automatically passed to this view model
-class MainViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(application: Application,sortTpe:Boolean) : AndroidViewModel(application) {
     private val db = getDatabase(application.applicationContext)
     private val eqRepository = EqRepository(db)
     private val _eqList = MutableLiveData<MutableList<Earthquake>>()
@@ -23,7 +23,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
 
 
     init {
-        getData(false)
+        getData(sortTpe)
     }
 
     private fun getData(sortByMagnitude: Boolean) {
