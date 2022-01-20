@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+<item
+    android:id="@+id/i_menu_time"
+    android:iconTint="@color/white"
+    android:icon="@drawable/ic_access_time_filled_black_24dp"
+    android:title="@string/sort_by_time"
+    app:showAsAction="ifRoom"
+   />
+    <item
+        app:showAsAction="ifRoom"
+        android:id="@+id/i_menu_magnitude"
+        android:iconTint="@color/white"
+        android:icon="@drawable/ic_warning_amber_black_24dp"
+        android:title="@string/sort_by_magnitude"
+     />
+</menu>

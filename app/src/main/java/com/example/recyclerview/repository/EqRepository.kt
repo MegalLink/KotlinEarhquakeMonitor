@@ -1,18 +1,33 @@
 package com.example.recyclerview.repository
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.example.recyclerview.EqApiResponse
 import com.example.recyclerview.domain.Earthquake
 import com.example.recyclerview.network.service
 import com.example.recyclerview.persistance.EqDB
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 class EqRepository(private val db: EqDB) {
-    val eqList: LiveData<MutableList<Earthquake>> = db.eqDao.getEarthquakes()
 
-    suspend fun fetchEqList() {
-        val response = service.getLastHourEarthquake()
-        val eqList = parseResponse(response)
-        db.eqDao.insertAll(eqList)
+    suspend fun fetchEqList(sortByMagnitude: Boolean): MutableList<Earthquake> {
+        return withContext(Dispatchers.IO){
+            val response = service.getLastHourEarthquake()
+            val eqList = parseResponse(response)
+            db.eqDao.insertAll(eqList)
+            fetchEqListFromDB(sortByMagnitude)
+        }
+    }
+
+    suspend fun fetchEqListFromDB(sortByMagnitude: Boolean): MutableList<Earthquake> {
+        return withContext(Dispatchers.IO) {
+            if (sortByMagnitude) {
+                db.eqDao.getEarthquakesOrderByMagnitude()
+            } else {
+                db.eqDao.getEarthquakes()
+            }
+        }
     }
 
     private fun parseResponse(response: EqApiResponse): MutableList<Earthquake> {
