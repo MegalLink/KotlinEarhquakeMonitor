@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerview.R
 import com.example.recyclerview.databinding.EqListItemBinding
 import com.example.recyclerview.domain.Earthquake
-import kotlin.math.roundToLong
 
 private val TAG=EqAdapter::class.java.simpleName
 
@@ -61,6 +60,4 @@ class EqAdapter(private val context: Context):ListAdapter<Earthquake,EqAdapter.E
         val earthquake=getItem(position)
         holder.bind(earthquake)
     }
-
-    fun Double.round(decimals: Int = 2): Double = "%.${decimals}f".format(this).toDouble()
 }

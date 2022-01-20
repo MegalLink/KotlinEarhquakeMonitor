@@ -1,5 +1,9 @@
 <resources>
-    <string name="app_name">RecyclerView</string>
+    <string name="app_name">Earthquake Monitor</string>
     <string name="no_earthquakes_right_now">NO EARTHQUAKES RIGHT NOW</string>
     <string name="magnitude_format">%.2f</string>
+    <string name="richter">Richter</string>
+    <string name="icon">icon</string>
+    <string name="longitude">Longitude</string>
+    <string name="latitude">Latitude</string>
 </resources>

@@ -1,10 +1,12 @@
 package com.example.recyclerview.domain
 
-import androidx.room.ColumnInfo
+import android.os.Parcelable
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "earthquakes")
+@Parcelize
 data class Earthquake(
     @PrimaryKey
     val id:String,
@@ -13,5 +15,5 @@ data class Earthquake(
     val magnitude:Double,
     val time:Long,
     val longitude: Double,
-    val latitude:Double) {
+    val latitude:Double):Parcelable {
 }

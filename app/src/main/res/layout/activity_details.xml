@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        tools:context=".ui.DetailsActivity">
+        <TextView
+            android:layout_marginTop="100dp"
+            android:id="@+id/tv_magnitude"
+            tools:text="4.50"
+            android:textSize="72sp"
+            android:textColor="@color/blue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginHorizontal="16dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_richter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="164dp"
+            android:text="@string/richter"
+            android:textColor="@color/text"
+            android:textSize="24sp"
+            app:layout_constraintStart_toEndOf="@id/tv_magnitude"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_location"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="48dp"
+            android:src="@drawable/ic_place_black_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tv_magnitude"
+            android:contentDescription="@string/icon" />
+
+        <TextView
+            android:id="@+id/tv_longitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:text="@string/longitude"
+            android:textColor="@color/text"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/iv_location"
+            app:layout_constraintTop_toBottomOf="@id/tv_magnitude" />
+
+        <TextView
+            android:id="@+id/tv_latitude"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/latitude"
+            android:textColor="@color/text"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/iv_location"
+            app:layout_constraintTop_toBottomOf="@id/tv_longitude" />
+
+        <TextView
+            android:id="@+id/tv_long_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:textColor="@color/teal"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/tv_longitude"
+            app:layout_constraintTop_toBottomOf="@id/tv_magnitude"
+            tools:text="123543" />
+
+        <TextView
+            android:id="@+id/tv_lat_val"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginStart="28dp"
+            android:layout_marginTop="16dp"
+            android:textColor="@color/teal"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/tv_latitude"
+            app:layout_constraintTop_toBottomOf="@id/tv_long_val"
+            tools:text="123543" />
+
+        <View
+            android:id="@+id/iv_separator_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="44dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_location" />
+
+        <ImageView
+            android:id="@+id/iv_risk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="40dp"
+            android:src="@drawable/ic_warning_amber_black_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_separator_1"
+            android:contentDescription="@string/icon" />
+
+        <TextView
+            android:id="@+id/tv_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="44dp"
+            android:textColor="@color/text"
+            android:textSize="16sp"
+            app:layout_constraintStart_toEndOf="@id/iv_risk"
+            app:layout_constraintTop_toBottomOf="@id/iv_separator_1"
+            tools:text="Ecuador Quito , etc" />
+
+        <View
+            android:id="@+id/iv_separator_2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="32dp"
+            android:background="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_risk" />
+
+        <ImageView
+            android:id="@+id/iv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="36dp"
+            android:src="@drawable/ic_access_time_filled_black_24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_separator_2"
+            android:contentDescription="@string/icon" />
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text"
+            android:textSize="16sp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="36dp"
+            app:layout_constraintStart_toEndOf="@id/iv_time"
+            app:layout_constraintTop_toBottomOf="@id/iv_separator_2"
+            tools:text="24/04/20 24:00:00" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

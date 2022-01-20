@@ -1,19 +1,21 @@
 package com.example.recyclerview
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.recyclerview.databinding.ActivityMainBinding
+import com.example.recyclerview.domain.ApiResponseStatus
 import com.example.recyclerview.domain.Earthquake
+import com.example.recyclerview.ui.DetailsActivity
 import com.example.recyclerview.ui.EqAdapter
 import com.example.recyclerview.viewmodel.MainViewModel
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding:ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
     private val adapter = EqAdapter(this)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,31 +33,45 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
-    private fun initObservers(){
+    private fun initObservers() {
         mainViewModel.eqList.observe(this, Observer {
             adapter.submitList(it)
             handleEmptyView(it)
         })
+        mainViewModel.status.observe(this, {
+            when (it) {
+                ApiResponseStatus.LOADING ->
+                    binding.pbLoading.visibility = View.VISIBLE
+                ApiResponseStatus.DONE, ApiResponseStatus.NOT_INTERNET_CONNECTION ->
+                    binding.pbLoading.visibility = View.GONE
+            }
+        })
     }
 
-    private fun initListeners(){
+    private fun initListeners() {
         //Inicializamos o damos la funcionalidad a onItemClicListener
         adapter.onItemClickListener = {
-            Toast.makeText(this,it.place,Toast.LENGTH_SHORT).show()
-       }
+            launchDetailActivity(it)
+        }
 
     }
 
-    private fun initRecyclerView(){
+    private fun initRecyclerView() {
         binding.rvEq.layoutManager = LinearLayoutManager(this)
         binding.rvEq.adapter = adapter
     }
 
-    private fun handleEmptyView(list:MutableList<Earthquake>){
-        if(list.isEmpty()){
+    private fun handleEmptyView(list: MutableList<Earthquake>) {
+        if (list.isEmpty()) {
             binding.tvEmptyEq.visibility = View.VISIBLE
-        }else{
+        } else {
             binding.tvEmptyEq.visibility = View.GONE
         }
+    }
+
+    private fun launchDetailActivity(eq:Earthquake){
+        val intent= Intent(this,DetailsActivity::class.java)
+        intent.putExtra(DetailsActivity.EQ_KEY,eq)
+        startActivity(intent)
     }
 }
